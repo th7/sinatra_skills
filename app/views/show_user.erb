@@ -1,0 +1,61 @@
+<div class="container">
+  <h1>Skills and Levels for <%= @user.name %></h1>
+  
+  <table class='skills'>
+    <tr>
+      <th>Name</th>
+      <th>Years</th>
+      <th>Formal?</th>
+    </tr>
+  <% @user.skills.each do |skill| %>
+  <% proficiencies = skill.proficiencies %>
+    <tr>
+      <td><%= skill.name %></td>
+      <td>
+        <ul class='skills'>
+        <% proficiencies.each do |proficiency| %>
+          <li><%= proficiency.years_experience %></li>
+        <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul class='skills'>
+        <% proficiencies.each do |proficiency| %>
+          <li><%= proficiency.formal_education %></li>
+        <% end %>
+        </ul>
+      </td>
+      <td>
+        <% proficiencies.each do |proficiency| %>
+            <form action="/proficiency" method="POST">
+              <input type='hidden' name="_method" value="DELETE">
+              <input type="hidden" name="proficiency[id]" value="<%= proficiency.id %>">
+              <input type="submit" value="Delete Skill">
+            </form>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+    <form action="/proficiency" method="POST">
+      <tr>
+        <td>
+          <select name="proficiency[skill_id]">
+            <% Skill.all.each do |skill| %>
+              <option value="<%= skill.id %>"><%= skill.name %></option>
+            <% end %>
+          </select>
+        </td>
+        <td>
+          <input type="text" name="proficiency[years_experience]" id="years_text">
+        </td>
+        <td>
+          <select name="proficiency[formal_education]">
+            <option value='false'>false</option>
+            <option value='true'>true</option>
+          </select>
+        </td>
+        <td><input type="submit" value="Add New Skill"></td>
+      </tr>
+    </form>
+  </table>
+</div>

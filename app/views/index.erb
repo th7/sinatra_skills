@@ -1,5 +1,39 @@
 <div class="container">
-  <h1>User Skills and Levels</h1>
-
-  <%# TODO: display the skills and proficiency levels for each user ... %>
+  <h1>Users, Skills, and Levels</h1>
+  
+  <table class='users'>
+    <tr>
+      <th>Name</th>
+      <th>Skills</th>
+      <th>Years</th>
+      <th>Formal?</th>
+    </tr>
+  <% @users.each do |user| %>
+  <% proficiencies = user.proficiencies %>
+    <tr>
+      <td><a href="/users/"><%= user.name %></a></td>
+      <td>
+        <ul class='users'>
+        <% proficiencies.each do |proficiency| %>
+          <li><%= "#{proficiency.skill.name} (#{proficiency.skill.context})" %></li>
+        <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul class='users'>
+        <% proficiencies.each do |proficiency| %>
+          <li><%= proficiency.years_experience %></li>
+        <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul class='users'>
+        <% proficiencies.each do |proficiency| %>
+          <li><%= proficiency.formal_education %></li>
+        <% end %>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+  </table>
 </div>

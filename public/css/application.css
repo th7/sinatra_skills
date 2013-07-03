@@ -1,3 +1,23 @@
+.users ul {
+  list-style-type: none;
+}
+
+.users td {
+  vertical-align: text-top;
+}
+
+.skills ul {
+  list-style-type: none;
+}
+
+.skills td {
+  vertical-align: text-top;
+}
+
+#years_text {
+  width: 4em;
+}
+
 .container {
   margin: 20px auto;
   width: 800px;

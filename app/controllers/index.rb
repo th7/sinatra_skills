@@ -1,8 +1,30 @@
+# use Rack::MethodOverride
+
 get '/' do
   # render home page
   @users = User.all
 
   erb :index
+end
+
+get '/signout' do
+  session.clear
+  redirect '/'
+end
+
+get '/users' do
+  @user = current_user
+  erb :show_user
+end
+
+post '/proficiency' do
+  current_user.proficiencies << Proficiency.new(params[:proficiency])
+  redirect '/users'
+end
+
+delete '/proficiency' do
+  current_user.proficiencies.find(params[:proficiency][:id]).destroy
+  redirect '/users'
 end
 
 #----------- SESSIONS -----------
